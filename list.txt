@@ -1,3 +1,11 @@
+.git
+.ds_store
+.env
+.DS_store
+.Ds_store
+config.php
+config.sql
+database.sql
 admin1.php
 admin1.html
 admin2.php
