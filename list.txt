@@ -1,3 +1,5 @@
+.git
+.ds_store
 admin1.php
 admin1.html
 admin2.php
