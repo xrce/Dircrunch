@@ -33,13 +33,13 @@ if ($argv[3] == "-s"){
 
 function subdoin($target){
 	include 'config.php';
+	print "$yellow //$white Searching for Subdomains\n";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_URL,'https://sonar.omnisint.io/subdomains/'.$target);
     $result=curl_exec($ch);
 	$json = json_decode($result, true);
-	print "$yellow //$white Searching for Subdomains\n";
 	if (!file_exists("subdomain")){
 		mkdir("subdomain");
 	}
@@ -71,13 +71,13 @@ function request($target, $dir){
 	if($httpcode == 200){
 		$handle = fopen("result/$target.txt", "a+");
 		fwrite($handle, "$log\n");
-		print "\n$okegreen [+]==[$white $log =>$okegreen OK";
-	}
-	elseif($httpcode == 403){
-		print "\n$yellow [-]==[$white $log =>$yellow FORBIDDEN";
-	}
-	else{
-		print "\n$red [x]==[$white $log =>$red ERROR";
+		print "\n$okegreen [+]$white $log$okegreen OK";
+	} elseif($httpcode == 403){
+		print "\n$yellow [-]$white $log$yellow FORBIDDEN";
+	} elseif($httpcode == 302){
+		print "\n$yellow [-]$white $log$yellow REDIRECTED";
+	} else {
+		print "\n$red [x]$white $log$red ERROR";
 	}
 }
 
